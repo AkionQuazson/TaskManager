@@ -1,0 +1,582 @@
+:root {
+    --primary-color: #3498db;
+    --secondary-color: #2c3e50;
+    --danger-color: #e74c3c;
+    --success-color: #27ae60;
+    --warning-color: #f39c12;
+    --light-bg: #ecf0f1;
+    --dark-text: #2c3e50;
+    --border-color: #bdc3c7;
+    --shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: var(--dark-text);
+    line-height: 1.6;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+}
+
+header {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    padding: 40px 30px;
+    text-align: center;
+}
+
+header h1 {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+
+header p {
+    font-size: 1.1em;
+    opacity: 0.9;
+}
+
+main {
+    padding: 30px;
+}
+
+/* Sections */
+section {
+    margin-bottom: 40px;
+}
+
+section:last-child {
+    margin-bottom: 0;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.section-header h2 {
+    font-size: 1.8em;
+    color: var(--dark-text);
+}
+
+/* Status Section */
+.status-section .current-project {
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: var(--shadow);
+}
+
+.status-section h2 {
+    color: var(--dark-text);
+    margin-bottom: 15px;
+    font-size: 1.2em;
+}
+
+.project-display {
+    margin: 20px 0 30px;
+    padding: 20px;
+    background: white;
+    border-radius: 8px;
+    min-height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.project-display .project-name {
+    font-size: 1.8em;
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+.idle-message {
+    color: #7f8c8d;
+    font-size: 1.1em;
+}
+
+.timer {
+    font-size: 3.5em;
+    font-weight: bold;
+    color: var(--primary-color);
+    font-family: 'Courier New', monospace;
+    margin: 20px 0;
+    letter-spacing: 2px;
+}
+
+/* Buttons */
+.btn {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 6px;
+    font-size: 1em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow);
+}
+
+.btn:active:not(:disabled) {
+    transform: translateY(0);
+}
+
+.btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.btn-primary {
+    background: var(--primary-color);
+    color: white;
+}
+
+.btn-primary:hover:not(:disabled) {
+    background: #2980b9;
+}
+
+.btn-secondary {
+    background: var(--light-bg);
+    color: var(--dark-text);
+    border: 2px solid var(--border-color);
+}
+
+.btn-secondary:hover:not(:disabled) {
+    background: #d5dbdb;
+}
+
+.btn-danger {
+    background: var(--danger-color);
+    color: white;
+}
+
+.btn-danger:hover:not(:disabled) {
+    background: #c0392b;
+}
+
+.btn-small {
+    padding: 8px 16px;
+    font-size: 0.9em;
+}
+
+button[data-action="clock-out"]::after {
+    content: "⏰ Active";
+}
+
+button[data-action="clock-out"]:hover::after {
+    content: "Clock Out";
+}
+
+.btn-icon {
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Projects Section */
+.projects-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.project-card {
+    background: white;
+    border: 2px solid var(--light-bg);
+    border-radius: 10px;
+    padding: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.project-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: var(--primary-color);
+}
+
+.project-card.active {
+    background: var(--light-bg);
+    border-color: var(--primary-color);
+    box-shadow: 0 4px 12px rgba(52, 152, 219, 0.2);
+}
+
+.project-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow);
+}
+
+.project-card-title {
+    font-size: 1.3em;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: var(--dark-text);
+}
+
+.project-time {
+    font-size: 1.5em;
+    color: var(--primary-color);
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.project-time-label {
+    font-size: 0.9em;
+    color: #7f8c8d;
+    margin-bottom: 15px;
+}
+
+.project-stats-breakdown {
+    background: #f8f9fa;
+    padding: 12px;
+    border-radius: 6px;
+    margin-bottom: 15px;
+    font-size: 0.95em;
+}
+
+.stat-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 0;
+}
+
+.stat-row:not(:last-child) {
+    border-bottom: 1px solid #e0e0e0;
+    margin-bottom: 6px;
+    padding-bottom: 6px;
+}
+
+.stat-label {
+    color: #7f8c8d;
+    font-weight: 500;
+}
+
+.stat-value {
+    color: var(--primary-color);
+    font-weight: 600;
+    font-family: 'Courier New', monospace;
+}
+
+.project-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid var(--light-bg);
+}
+
+.project-actions button {
+    flex: 1;
+    padding: 8px;
+    font-size: 0.9em;
+}
+
+.empty-message {
+    grid-column: 1 / -1;
+    text-align: center;
+    color: #95a5a6;
+    padding: 40px;
+    font-size: 1.1em;
+}
+
+/* Statistics Section */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.stat-card {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 25px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: var(--shadow);
+}
+
+.stat-card h3 {
+    font-size: 1.1em;
+    margin-bottom: 15px;
+    opacity: 0.9;
+    font-weight: 500;
+}
+
+.stat-time {
+    font-size: 2.2em;
+    font-weight: bold;
+    font-family: 'Courier New', monospace;
+}
+
+/* Modal */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    animation: fadeIn 0.3s ease;
+}
+
+.modal.hidden {
+    display: none;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.modal-content {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    width: 90%;
+    max-width: 500px;
+    padding: 0;
+    animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.modal-small {
+    max-width: 400px;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 25px;
+    border-bottom: 1px solid var(--light-bg);
+}
+
+.modal-header h2 {
+    margin: 0;
+    color: var(--dark-text);
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    font-size: 28px;
+    cursor: pointer;
+    color: #95a5a6;
+    transition: color 0.2s;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.close-btn:hover {
+    color: var(--dark-text);
+}
+
+.modal-content > form,
+.modal-content > div {
+    padding: 25px;
+}
+
+.modal-content h2 {
+    color: var(--dark-text);
+}
+
+.modal-content p {
+    margin-bottom: 20px;
+    color: #7f8c8d;
+}
+
+/* Form */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: var(--dark-text);
+}
+
+.form-group input {
+    padding: 12px;
+    border: 2px solid var(--light-bg);
+    border-radius: 6px;
+    font-size: 1em;
+    transition: border-color 0.3s;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+}
+
+.color-picker {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.color-picker input {
+    width: 100px;
+    height: 50px;
+    cursor: pointer;
+    border: 2px solid var(--light-bg);
+    border-radius: 6px;
+}
+
+.color-preview {
+    width: 50px;
+    height: 50px;
+    border-radius: 6px;
+    box-shadow: var(--shadow);
+}
+
+.form-actions {
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;
+}
+
+.form-actions button {
+    flex: 0 1 auto;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    header {
+        padding: 25px 20px;
+    }
+
+    header h1 {
+        font-size: 1.8em;
+    }
+
+    main {
+        padding: 20px;
+    }
+
+    .projects-list {
+        grid-template-columns: 1fr;
+    }
+
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .timer {
+        font-size: 2.5em;
+    }
+
+    .modal-content {
+        width: 95%;
+    }
+
+    .section-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .section-header h2 {
+        font-size: 1.5em;
+    }
+}
+
+@media (max-width: 480px) {
+    header {
+        padding: 20px 15px;
+    }
+
+    header h1 {
+        font-size: 1.5em;
+    }
+
+    header p {
+        font-size: 0.95em;
+    }
+
+    main {
+        padding: 15px;
+    }
+
+    .btn {
+        padding: 10px 16px;
+        font-size: 0.9em;
+    }
+
+    .timer {
+        font-size: 2em;
+    }
+
+    .project-time {
+        font-size: 1.2em;
+    }
+
+    .stat-time {
+        font-size: 1.8em;
+    }
+}

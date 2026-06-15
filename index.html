@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hobby Timeclock</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>⏱️ Hobby Timeclock</h1>
+            <p>Track time spent on your favorite projects</p>
+        </header>
+
+        <main>
+            <!-- Current Status Section -->
+            <section class="status-section">
+                <div class="current-project" id="currentProject">
+                    <h2>Currently Clocked In</h2>
+                    <div class="project-display">
+                        <p class="idle-message">No project active</p>
+                    </div>
+                    <div class="timer" id="timer">00:00:00</div>
+                    <button id="clockOutBtn" class="btn btn-danger" disabled>Clock Out</button>
+                </div>
+            </section>
+
+            <!-- Projects Section -->
+            <section class="projects-section">
+                <div class="section-header">
+                    <h2>Projects</h2>
+                    <button id="addProjectBtn" class="btn btn-primary">+ New Project</button>
+                </div>
+
+                <div class="projects-list" id="projectsList">
+                    <p class="empty-message">No projects yet. Create one to get started!</p>
+                </div>
+            </section>
+
+            <!-- Statistics Section -->
+            <section class="stats-section">
+                <h2>Statistics</h2>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <h3>This Week</h3>
+                        <div class="stat-time" id="weekTime">0h 0m</div>
+                    </div>
+                    <div class="stat-card">
+                        <h3>This Month</h3>
+                        <div class="stat-time" id="monthTime">0h 0m</div>
+                    </div>
+                    <div class="stat-card">
+                        <h3>All Time</h3>
+                        <div class="stat-time" id="allTimeTime">0h 0m</div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Modal for Creating/Editing Projects -->
+    <div id="projectModal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">New Project</h2>
+                <button class="close-btn" id="closeModalBtn">&times;</button>
+            </div>
+            <form id="projectForm">
+                <div class="form-group">
+                    <label for="projectName">Project Name</label>
+                    <input type="text" id="projectName" placeholder="e.g., Painting, Guitar, Reading" required>
+                </div>
+                <div class="form-group">
+                    <label for="projectColor">Color</label>
+                    <div class="color-picker">
+                        <input type="color" id="projectColor" value="#3498db">
+                        <span id="colorPreview" class="color-preview" style="background-color: #3498db;"></span>
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" id="cancelBtn">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save Project</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal for Confirming Deletion -->
+    <div id="deleteModal" class="modal hidden">
+        <div class="modal-content modal-small">
+            <h2>Delete Project?</h2>
+            <p id="deleteMessage">Are you sure you want to delete this project? This cannot be undone.</p>
+            <div class="form-actions">
+                <button class="btn btn-secondary" id="deleteCancelBtn">Cancel</button>
+                <button class="btn btn-danger" id="deleteConfirmBtn">Delete</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/storage.js"></script>
+    <script src="js/timeCalculations.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
